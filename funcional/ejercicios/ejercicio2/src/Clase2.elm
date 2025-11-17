@@ -60,17 +60,22 @@ buscar lista com =
 
 -- Busca el Máximo
 -- Encuentra el valor máximo en una lista
-max : List Int -> Int
-max lista =
+maximo : List Int -> Maybe Int
+maximo lista =
     case lista of
         [] ->
-            0
+            Nothing
+
+        [x] ->
+            Just x
 
         x :: xs ->
-            let
-                rec = max xs
-            in
-            if rec > x then rec else x
+            case maximo xs of
+                Just rec ->
+                    Just (if rec > x then rec else x)
+
+                Nothing ->
+                    Just x
 
 
 
